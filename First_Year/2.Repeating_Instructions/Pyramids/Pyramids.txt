@@ -1,0 +1,142 @@
+PROBLEM - PYRAMID
+
+In this problem we will be playing with what we learned so far, in order to draw(with text).
+
+
+What you'll build:
+
+You will build a simple command line program that gets input from the user, and draws different shapes, using asterisk "*" characters.
+
+
+As an ASCII-artist, Bob wants to be able to draw certain basic shapes to the console, using #*#s, and of the size he defines. He uses this as the foundation for the ASCII art he constructs.
+
+	- Given that Bob enters "pyramid" as the shape to draw
+	- When he specify the height as "5"
+	- Then it must draw a pyramid with 5 rows, to form a basic pyramid shape:
+
+				*
+			       ***
+			      *****
+			     *******
+			    ********* 
+
+	- Given that Bob enters "square" as the shape to draw
+	- When he specify the height as "5"
+	- Then it must draw a square with height and width of "5":
+			    *****
+			    *****
+			    *****
+			    *****
+			    *****
+
+	- Given that Bob enters "triangle" as the shape to draw
+	- When he specify the height as "5":
+
+			    *
+			    **
+			    ***
+			    ****
+			    *****
+
+> STEP 1 Get Input
+	Start by first getting the necessary input from the user. At this stage we need two input parameters:
+	the shape (it must be either pyramid, square or triangle)
+
+	the height (with a max of 80)
+
+		- Create a simple draw.py program that asks the user for the shape to draw, and then the height.
+		- At this step it can simply print out the response.
+
+
+> STEP 2 Draw Pyramid
+	Now go on to implement a simple function that output a pyramid of a given height using *.
+
+	As an example, a pyramid of height 3:
+				    *
+				   ***
+				  *****
+	Or pyramid of height 5:
+				    *
+				   ***
+				  *****
+				 *******
+				*********
+
+
+> STEP 3 Draw Square
+	Implement a similar function to draw a square of given height (i.e. the width must match).
+
+	For example, height == 3:
+
+				***
+				***
+				***
+	And height == 5:
+
+				*****
+				*****
+				*****
+				*****
+				*****
+
+
+> STEP 4 Draw Triangle
+	In this program, the triangle shape is a right-angled triangle.
+	Draw one of the specified height.
+
+	Example, where height == 3:
+
+				*
+				**
+				***
+
+	And example with height == 5:
+
+				*
+				**
+				***
+				****
+				*****
+
+
+> STEP 5 Outline Mode:
+
+	Bob likes our draw app, but asked that it must also be able to draw only the outlines of the shapes. Most of the time he will need the solid shapes, but 		sometimes he want only the outline.
+
+	The following scenario has been added to our use case:
+	Given that Bob enters square as the shape to draw
+
+	- When he specify the height as 5
+
+	- And when he enters a blank or a n in response to the Outline only? (y/N): prompt
+
+	- Then it must draw a square with 5 rows, filled with #*#s:
+
+				*****
+				*****
+				*****
+				*****
+				*****
+
+	- Given that Bob enters square as the shape to draw
+
+	- When he specify the height as 5
+
+	- And when he enters a Y in response to the Outline only? (y/N): prompt
+
+	- Then it must draw a square with 5 rows, but with only the outline #*#s being drawn:
+
+				*****
+				*   *
+				*   *
+				*   *
+				*****
+
+
+ > STEP 6 Other Shapes
+	Our Draw app is pretty limited in the number of shapes it can draw. This step 
+
+
+
+
+			       

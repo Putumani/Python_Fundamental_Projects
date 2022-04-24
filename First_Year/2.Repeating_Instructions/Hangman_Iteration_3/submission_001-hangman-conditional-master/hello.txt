@@ -1,0 +1,11 @@
+cow
+felt
+seafood
+owl
+sheep
+goat
+sleep
+snake
+car
+ship
+sailor

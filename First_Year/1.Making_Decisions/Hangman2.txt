@@ -1,0 +1,37 @@
+Hangman Iteration 2
+
+In the 1st iteration you created a simple hangman game, and now we want to extend it to be more interesting and fun, using what we learned about conditional programming.
+
+
+Goal:
+
+The game user us expecting to be more engaged when playing the Hangman game, and as such you want to make it more interactive, and eisier to use.
+
+
+What you will program: 
+
+- Add if..else statements to test user input
+- Use user input to determine program behaviour
+
+
+What you will learn:
+
+- Using conditionals in Python
+- Decides on program flow based on conditional logic
+
+
+Step 1: Show Correctness
+
+Instead of just printing out the answer, we want to indicate to the player whether they answered with  the correct missing. *If the input supplied by the player is the missing letter of the word to guess, show the message. Well done! You are awesome! as the final output of the game. *if the input is not the missing letter, show Wrong! Do better next time. as the final out.
+
+
+Step 2: Multiple word lists
+
+We want the player to be able to select which word list file to use, so e.g. It can be used to more complex words to make the game more challenging(or even be used to test spelling lists when kids have to practice their spelling during lockdown)
+
+- Before selecting from short_words.txt, first ask the player what file should be loaded, with the prompt:'Words file?[leave empty to use short_words.txt]:'
+
+- If he/she just presses enter, then it should load the default short_words.txt file, else it must load the file they typed in.
+
+- You can create your own alternative files, each a normal text file with a word per line.
+

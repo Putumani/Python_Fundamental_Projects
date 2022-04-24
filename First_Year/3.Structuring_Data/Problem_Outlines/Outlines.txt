@@ -1,0 +1,122 @@
+PROBLEM - OUTLINE
+We will use what we learned about various data structures, like tuples, lists, sets and maps, to manipulate collections of data.
+
+
+Goal:
+You are tasked with storing the outline of a course that teach people how to program in Python. An ideal opportunity to apply various data structures.
+
+What you will program:
+	You will present a programming course in a simple program, course.py that prints out the course outline, by:
+
+		- Creating a set of topics for the course.
+
+		- Creating a map of topic to its list of problems.
+
+		- Creating a simple tuple structure to try out how to show the progress of a student for a list of problems.
+
+		- Traversing, sorting and printing the various structures.
+
+What you will learn:
+	You will learn:
+
+	- Working with tuple, list, set and map.
+
+	- Various ways of constructing these containers.
+
+	- How to traverse it.
+
+
+
+INSTRUCTIONS
+
+> STEP 1 Topics
+	You have the following list of topics planned for your course:
+
+		Introduction to Python
+
+		Tools of the Trade
+
+		How to make decisions
+
+		How to repeat code
+
+		How to structure data
+
+		Functions
+
+		Modules
+
+	Update the code in course.py to create a set that contains these topics, and then print each item in the list, under the heading Course Topics.
+
+	The output must look like this (_but note that the order might be different, since a set is unordered):
+
+		Course Topics:
+		* Introduction to Python
+		* Tools of the Trade
+		* How to make decisions
+		* How to repeat code
+		* How to structure data
+		* Functions
+		* Modules
+
+	NOTE	try and add the same topic twice. How many times does it appear in the set? What happens if you change it to a list?_
+
+
+
+> STEP 2 Adding Problems
+	For this exercise, assume each topic has three problems: Problem 1, Problem 2 and Problem 3.
+
+	- Define a map that maps from the topic name, to a list of each topic’s problems.
+
+	- Build up this map by traversing (i.e. iterating over) the topics set and adding an entry for each topic as key, and the map value being a list of the problems.
+
+	- Print out this map under the heading Problems:
+
+	- The output must now reflect the problems map:
+
+		Course Topics:
+		* Introduction to Python
+		* Tools of the Trade
+		* How to make decisions
+		* How to repeat code
+		* How to structure data
+		* Functions
+		* Modules
+		Problems:
+		* Introduction to Python : Problem 1, Problem 2, Problem 3
+		* Tools of the Trade : Problem 1, Problem 2, Problem 3
+		* (etc.)
+
+
+
+> STEP 3 Keeping track
+	In preparation for eventually building a tool to track student’s progress in the course, we want to play with some ideas.
+
+	- Use a tuple that combines: * a student name * a topic name * a problem * a status, e.g. STARTED, GRADED or COMPLETED
+
+	- Now create a list with a few example tuples for made-up students, and print out this list under the heading Student Progress:. Make sure there is at least an 	  example for each possible status (i.e. STARTED, GRADED or COMPLETED). Note: the output format for an entry must be no. Student Name - Topic - Problem [Status], 		  e.g. 1. Tom - Modules - Problem 2 [GRADED].
+
+	- Your output should look like:
+
+		Course Topics:
+		* Introduction to Python
+		* Tools of the Trade
+		* How to make decisions
+		* How to repeat code
+		* How to structure data
+		* Functions
+		* Modules
+		Problems:
+		* Introduction to Python : Problem 1, Problem 2, Problem 3
+		* Tools of the Trade : Problem 1, Problem 2, Problem 3
+		* (etc.)
+		Student Progress:
+		1. Nyari - Introduction to Python - Problem 2 [STARTED]
+		2. Adam - How to make decisions - Problem 1 [GRADED]
+		3. (etc.)
+> STEP 4 Sorting
+Sometimes some know order of elements in a collection of data helps us to more easily understand it.
+
+	- Create a list from the set of topics, and sort it in alphabetical order before printing it out.
+
+	- Sort the Student Progress data by the status element in each tuple, so that it first displays the STARTED items, then the GRADED and then the COMPLETED ones.

@@ -1,0 +1,150 @@
+MASTERMIND - ITERATION 1
+We will implement a simple version of the Mastermind game, and using an iterative programming approach we will enhance it in future problems.
+
+Iteration 1: Create a simple implementation of Mastermind using what you know about data structures, loops and conditional statements.
+
+Iteration 2: Use functions to improve the code.
+
+Iteration 3: Improve the use of functions and return values, as well as applying testing techniques.
+
+
+Goal:
+Our goal is to implement a simple mastermind.py program that allows a user to play Mastermind on the command line.
+
+
+For our simple game:
+
+	- We will use the digits 1 to 8 instead of colours.
+
+	- The game (codemaster) will generate a random 4-digit code, e.g. 2641.
+
+	- We keep things simpler by not allow duplicate digits in the created code that must be guessed.
+
+	- The player (codebreaker) gets 12 turns to guess the 4 digits.
+
+	- The player must enter 4 digits.
+
+	- The game indicates (a) how may are correct digit and in correct place, or (b) correct digit, but not in the correct place.
+
+
+What you will program:
+
+	- Generate a random 4-digit code.
+
+	- Repeatedly get user input and evaluate.
+
+	- Calculate correctness of digits in guess.
+
+	- Output results.
+
+
+What you will learn:
+	To use data structures to represent data (state) of your Mastermind game
+
+	How to traverse data structures to compare them with each other
+
+
+
+INSTRUCTIONS
+
+> STEP 1 Guess a code
+You need to start by adding code to run_game() in mastermind.py that will guess a 4 digit code, where each digit is in the range 1 to 8 only.
+
+	- Define a list that will contain the code.
+
+	- Use random (as in Hangman problem) to add 4 digits to the list, where each digit must be in the range 1 to 8.
+
+	- When this is done, output 4-digit Code has been set. Digits in range 1 to 8. You have 12 turns to break it.
+
+> STEP 2 Get a guess
+	- Now add the ability for user to enter a guess.
+
+	- Get user input with the prompt #Input 4 digit code: #.
+
+	- Ensure that it is exactly 4 characters in length.
+
+	- Check that each of those characters is a digit in the range 1 to 8.
+
+	- If the input is not 4 in length, or not all digits, then output Please enter exactly 4 digits.
+
+Running mastermind.py should now give output like this:
+
+	4-digit Code has been set. Digits in range 1 to 8. You have 12 turns to break it.
+	Input 4 digit code: 34d
+	Please enter exactly 4 digits.
+	Input 4 digit code:
+
+
+> STEP 3 Evaluate input
+To evaluate an answer, we first check if it is the actual generated code. If it matches exactly, then the player wins. If not, then we must output:
+
+	the number of digits that are both correct and in the correct place.
+
+	the number of digits that are correct, but not in the correct place.
+
+Update mastermind.py in the following way:
+
+	- Add code to evaluate the input provided in the previous step.
+
+	- Compare the input to the list containing the generated code, and calculate:
+
+		the number of digits that are both correct and in the correct place.
+
+			Output this as Number of correct digits in correct place:
+
+		the number of digits that are correct, but not in the correct place.
+
+			Output this as Number of correct digits not in correct place:
+
+If it matches the generated code, then output Congratulations! You are a codebreaker! followed by #The code was: # and the code.
+
+If it does not match, then output Wrong. Guess again.
+
+Running mastermind.py should now give output like this (assuming code 6178):
+
+	4-digit Code has been set. Digits in range 1 to 8. You have 12 turns to break it.
+	Input 4 digit code: 1234
+	Number of correct digits in correct place:     0
+	Number of correct digits not in correct place: 1
+	Wrong. Guess again.
+	Input 4 digit code: 6134
+	Number of correct digits in correct place:     2
+	Number of correct digits not in correct place: 0
+	Wrong. Guess again.
+	Input 4 digit code: 6178
+	Number of correct digits in correct place:     4
+	Number of correct digits not in correct place: 0
+	Congratulations! You are a codebreaker!
+	The code was: 6178
+
+
+> STEP 4 Count guesses
+Finally, let us track the number of remaining guesses as well, so we give maximum 12 guesses to the player.
+
+Update mastermind.py to:
+
+	Track the number of guesses remaining (start with 12 guesses).
+
+	After each wrong guess, rather print out #Turns left: # and the number of remaining turns.
+
+	User testing has found the message Wrong. Guess again. to be too harsh, so we better remove that.
+
+	The game must end if 0 turns are left.
+
+Running mastermind.py should now show:
+
+	4-digit Code has been set. Digits in range 1 to 8. You have 12 turns to break it.
+	Input 4 digit code: 1234
+	Number of correct digits in correct place:     0
+	Number of correct digits not in correct place: 1
+	Turns left: 11
+	Input 4 digit code: 6134
+	Number of correct digits in correct place:     2
+	Number of correct digits not in correct place: 0
+	Turns left: 10
+	Input 4 digit code: 6178
+	Number of correct digits in correct place:     4
+	Number of correct digits not in correct place: 0
+	Congratulations! You are a codebreaker!
+	The code was: 6178
+

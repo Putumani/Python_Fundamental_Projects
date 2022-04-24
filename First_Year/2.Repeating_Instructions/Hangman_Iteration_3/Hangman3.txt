@@ -1,0 +1,143 @@
+HANGMAN - ITERATION 3
+In the second iteration of Hangman you added conditional logic to your Hangman game, and now we want to extend it to be more interesting and fun, using what we learned about loops.
+
+Goal:
+The game user is expecting to be more engaged when playing the Hangman game, and as such you want to make it more interactive, and easier to use.
+
+
+What you will program:
+Change to only get one letter at a time input from the user.
+
+Get repeated input until the word is guessed.
+
+Add if..else logic to determine when to exit the hangman game.
+
+Track the number of guesses.
+
+Output a text presentation of the game.
+
+
+What you will learn:
+How to use repeating instructions (loops) in Python.
+
+How to control program flow based on conditional and repeating logic.
+
+
+
+INSTRUCTIONS
+
+> STEP 1 One character guess at a time
+	In the traditional Hangman game, the player guesses one character at a time. If that letter is found in the word to be guessed, it is filled in, and the result 	is displayed to the player.
+	Example:
+	if the word to guess is this, and it started with __i_, and if the player enters the character t, then the game must show t_i_ as the result
+
+	if the word to guess is this, and it started with __i_, and if the player enters the character w, then the game must show output indicating the player guessed 		wrong.
+
+	Update your Hangman game to:
+	only fill in one character of the word to start with (instead of just leaving out one character)
+
+	let the user guess one character only
+
+	Example output if player guessed correctly:
+		Words file? [leave empty to use short_words.txt] :
+		Guess the word: f____
+		Guess the missing letter: i
+		fi___
+
+	Example output if player guessed incorrectly:
+		Words file? [leave empty to use short_words.txt] :
+		Guess the word: f____
+		Guess the missing letter: a
+		Wrong!
+
+
+> STEP 2 Ask until done
+	Now that we have the guessing logic (flow) working for one character at a time, update the game to loop over this functionality, i.e. update the game:
+	to repeatedly ask the user to guess a next character (and fill in correct characters, and indicate incorrect ones as per step 1) until the whole word has been 		guessed.
+
+	Words file? [leave empty to use short_words.txt] :
+	Guess the word: f____
+	Guess the missing letter: a
+	Wrong!
+	Guess the missing letter: i
+	fi___
+	Guess the missing letter:
+
+
+> STEP 3 Exit
+	Hmm, how do we exit the game now? The player can press ctrl-C, but that seems very clunky.
+	Update the game so that it break out of the game loop (and exits the game) when the player enters quit or exit.
+
+	It is always good to be nice, so say Bye! before ending the game.
+
+	Your output must be similar to:
+	Words file? [leave empty to use short_words.txt] :
+	Guess the word: f____
+	Guess the missing letter: a
+	Wrong! Number of guesses left: 4
+	Guess the missing letter: exit
+	Bye!
+
+
+> STEP 4 Keep score
+	What is a game without keeping some kind of score?
+	You can first just have some counter that counts down how many guesses the player has left, to test your logic/program flow. Once you are happy with that, you 		can add drawing of the stick figure.
+	Begin with a "Number of guesses" of 5
+
+	When a player types an incorrect letter, then decrease the number of guesses by 1 and print out Wrong! Number of guesses left: and the number of remaining 		guesses.
+
+	Once the player reach 0 number of guesses, then the game ends with Sorry, you are out of guesses. The word was: and the answer.       
+
+
+> STEP 5 Draw Hangman
+	Hangman traditionally involves drawing a stick figure of a person who gets hanged (from there the name). Every time the player guess wrong, a part is drawn. Once 		completed, the player loses.
+	It starts with the structure, then a body limb at a time, until the full figure is drawn.
+	The aim for the player is to guess the complete word before this happens.
+	Use simple text characters (ASCII art) to draw this figure, rather than providing the number of guesses left.
+
+Examples
+
+	Output at start of the game:
+		Guess the word: ___s_
+		Guess the missing letter: a
+		Wrong! Number of guesses left: 4
+		/----
+		|
+		|
+		|
+		|
+		_______
+		Guess the missing letter:
+		Output after player entered the (correct) letter n as guess:
+		Guess the missing letter: n
+		n__s_
+		Guess the missing letter:
+		Output after player entered the (incorrect) letter z as guess:
+		Guess the missing letter: z
+		Wrong! Number of guesses left: 3
+		/----
+		|   0
+		|
+		|
+		|
+		_______
+		Guess the missing letter:
+		Output if player used up all the chances:
+		Guess the missing letter: q
+		Wrong! Number of guesses left: 0
+		/----
+		|   0
+		|  /|\
+		|   |
+		|  / \
+		_______
+		Sorry, you are out of guesses. The word was: feet
+
+Note: you must add figure art for when 2 guesses and 1 guess is left.
+
+
+> STEP 6 Words list file as argument
+	We want the player to be able to select which word list file to use by providing it as a command line argument to the program.
+	To specify an alternative words list file (my_words.txt) to use, run Hangman using e.g. python hangman.py my_words.txt
+
+	If no file is specified as command line argument, then use the default file (short_words.txt)
