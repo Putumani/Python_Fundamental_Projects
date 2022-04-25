@@ -1,0 +1,118 @@
+MASTERMIND - ITERATION 3
+In the second iteration of Mastermind you decomposed the program into several functions, thus creating a better structured program. However, we had to do something that is not the best approach: we had to use global variables, so that our functions could change the state of these variables as needed.
+
+Iteration 3
+
+Goal:
+The use case for our game remains the same as in the Data Structures - Mastermind problem. However, after a second code review by the Big Man Upstairs (remember Trevor..), you were tasked once again to make further improvements. "No global variables" were the last words you heard.
+
+As a software developer, you need the code to be better structured, so that it is easier to maintain, and extend with functionality in the future.
+Your team lead also encourages you to try out Test Driven Development.
+
+What you will program:
+We want to apply what we learned about returning values from functions to the existing Mastermind codebase, and modify the functions to return values, where relevant, and in doing so get rid of the global variables.
+
+Introduce return values to your functions
+
+Get rid of global variables
+
+Implement unit tests for your functions
+
+How to return values from functions
+
+Learn a powerful technique called Test Driven Development, which helps to design and implement awesome functions.
+
+INSTRUCTIONS
+
+> STEP 1 Returning the Code
+In the Simple Compute we learned about return values for functions, and how to use that.
+Update the create_code in mastermind.py to return the code that was created, rather than setting it on the global variable code
+
+	- update the methods calling create_code to use this return value
+
+	- you might need to add code as parameter to some of the other functions
+
+	- after this change there should be no global variable called code anymore
+
+Remember: the created code may not contain duplicate digits in it.
+
+	-The unit tests that ship with the problem code should still succeed after you made your change.
+
+
+
+> STEP 2 Test your Function
+But what about this technique called "TDD"? We should actually have written a simple test for create_code first, and only then implement the function.
+Create a separate unit tests file test_functions.py, in the same directory as mastermind.py, where you will add your tests for the functions you are creating.
+
+	- Now add a test method that tests that create_code returns a list with 4 digits, where each digit is in the range 1 to 8 (i.e. including 8).
+
+	- Test this by letting the test call create_code a hundred times.
+
+	- Run your unit tests using the command python3 -m unittest test_functions.py
+
+
+
+> STEP 3 Update check_correctness Function
+Now let us update the check_correctness function to return a boolean value for whether the code has been entered correctly.
+First write test methods in your test_functions.py for how you think check_correctness should behave.
+
+Remember, we are getting rid of global variables, so you must update check_correctness to be provided the data it needs via parameters, so that the logic inside the method remains the same
+
+	- Implement tests for different combinations of parameter values, that should result in different true of false return values form the function.
+
+	- These tests will fail until you actually implement the new check_correctness method.
+
+	- Now implement the new check_correctness method to take the necessary parameters, and return true or false.
+
+	- Update the relevant places in the code that used the old check_correctness method to make use of the return value and pass in the proper parameter values.
+
+	- The unit tests that ship with the problem code should still succeed after you made your change.
+
+
+
+> STEP 4 Improve Getting Input
+The take_turn method smells a bit of trying to do too much. Let us improve it a step at a time.
+The code that gets input from the user, and repeats this until the input is exactly 4 characters, looks like a candidate for change.
+
+	- Implement a test method in test_functions.py that tests how you would ideally like a function, e.g. get_answer_input to behave.
+
+	- This means you need to test that such a method returns a string with 4 digits, and it will repeatedly ask user to enter another guess until the input adheres 	to this.
+
+	- Please read mocking standard input to learn how you can test functions that need input from the user.
+
+	- Now implement get_answer_input and update take_turn to make use of this function to get the answer input from the user.
+
+	- The unit tests that ship with the problem code should still succeed after you made your change.
+
+
+
+> STEP 5 Improve take_turn Function
+Great, we simplified take_turn a bit. But we were a bit naughty: we should have written a test first for take_turn. Since we now we are adding return values, let us test first how we want it to work.
+The function take_turn updates the global variables correct_digits_and_position and correct_digits_only. We want to change the function so it rather returns these two values, using a tuple.
+Implement different test methods for a new take_turn(code) function that returns (correct_digits_and_position, correct_digits_only) as a tuple.
+
+	- Use the mocking of standard input technique used in the previous step.
+
+	- Test different combination of answer input for a code, to test the expected values for correct_digits_and_position and correct_digits_only
+
+	- Now update take_turn to take code as a parameter, and return (correct_digits_and_position, correct_digits_only).
+
+	- Your tests should succeed after this method is implemented.
+
+	- Update the code using take_turn to pass the code and use the returned value.
+
+	- You might need to update some other functions to take correct_digits_and_position and correct_digits_only as parameters in this step.
+
+	- The unit tests that ship with the problem code should still succeed after you made your change.
+
+
+
+> STEP 6 Other Improvements
+What other improvements can you make by either introducing new functions, or changing existing ones to use return values?
+Implement your improvement, but remember to first write the tests, then the function.
+
+	- After your changes check that:
+
+	- There are no global variables left over.
+
+	- The unit tests that ship with the problem code should still succeed after you made your change.

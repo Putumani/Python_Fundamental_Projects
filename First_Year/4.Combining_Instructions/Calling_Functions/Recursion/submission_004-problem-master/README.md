@@ -1,12 +1,12 @@
-# Problems - Mastermind
+# Problems - Recursion
 
-* Modify `mastermind.py` to solve the problem as stated in the text file{{Mastermind_1.txt}}.
+* Modify `super_algos.py` to solve the problem as stated in the text file{{Recursion.txt}}.
 * You can run the program using the instructions in *To Run* below.
 * You can test technical correctness by running the unit tests as in the section *To Test* below.
 
 ### To Run
 
-* `python3 mastermind.py`
+* `python3 super_algos.py`
 * follow the input prompts to get the desired output
 
 ### To Test

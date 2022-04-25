@@ -1,0 +1,115 @@
+PROBLEM - RECURSION
+Recursion is a very powerful technique, made by possible by the fact that a function can call itself. In this problem we are going to solve some mathematical challenges using recursion.
+
+
+You will learn:
+
+	- Learn how to call functions from other functions
+
+	- Learn various ways to do function composition
+
+	- Get exposed to recursion
+
+Use Case:
+You are tasked to write some command line programs to help the computer science department with their work. You will create a series of easy to use Python functions, that they will integrate into their bigger system.
+
+Goal:
+As a computer science tutor, the user of these scripts want efficient solutions for certain algorithmic problems, in order that he/she can integrate it into their code and use it to easier mark results from students' projects. You will implement these functions in super_algos.py.
+
+INSTUCTIONS
+
+> STEP 1 Find Minimum
+Implement a recursive function, find_min(elements), that finds and returns the minimum element in a list of integers.
+What is the simplest array for which to get the minimum element? Use this as the basic condition to check for.
+
+	- Use recursion to implement this function.
+
+	- If the elements parameter contains invalid (i.e. non-integer or empty) elements, then the function can return -1.
+
+	- Do NOT use any existing Python functions that provide the minimum of a list (but you can use it to test your result).
+
+	- Implement unit tests for your function, called test_algos.py, in the same directory as super_algos.py.
+
+	- Especially test boundary conditions, e.g. what happens if the list of elements is empty?
+
+	TIP	Follow the TDD approach by first writing the test_algos.py test cases, and then implementing the code in super_algos.py to make them succeed.
+	An example of how it can be called:
+	my_list = [3,6,8,9,3,11]
+	print(find_min(my_list)) # prints '3'
+
+
+> STEP 2 Get Sum
+Implement a recursive function, sum_all(elements), that calculates and returns the sum of all element in a list of integers.
+What is the simplest array for which to get the sum? Use this as the basic condition to check for.
+
+	- Use recursion to implement this function.
+
+	- If the elements parameter contains invalid (i.e. non-integer or empty) elements, then the function can return -1.
+
+	- Do NOT use any existing Python functions that provide the sum of a list (but you can use it to test your result).
+
+	- Remember to implement unit tests for your function, and especially test boundary conditions, e.g. what happens if the list of elements is empty?
+
+	An example of how it can be called:
+	my_list = [1,2,3,4,5]
+	print(sum_all(my_list)) # prints '15'
+	Reduce
+	The sum_all function is using recursion to traverse a data structure, and reduce it to a single value, namely the sum of all the elements. This concept of 		reduction will pop up again in the Comprehensions topic, and together with map is used a lot to recursively process data structures.
+
+	We use this concept when we want to get a single output from processing a list, set or other collection of data, like maps or dictionaries. We can store 		temporary variables with e.g. the sum of values we processed so far, and loop through the data structures, but by using recursion we have much cleaner and 		elegant code for processing, and in this case, reducing the collection to the output we need, which is the sum of all the elements.
+
+	Note that this reduce operation does not change the original list in any way.
+
+
+
+> STEP 3 Print All Possible Strings
+Given a set of characters and a positive integer n, print all possible strings of length n that can be formed from the given set.
+
+	Examples:
+	Input:
+	set[] = {'x', 'y'}, k = 3
+
+	Output:
+	xxx
+	xxy
+	xyx
+	xyy
+	yxx
+	yxy
+	yyx
+	yyy
+	Or:
+	Input:
+	set[] = {'a', 'b'}, k = 2
+
+	Output:
+	aa
+	ab
+	ba
+	bb
+	There will be +n^(size of set)+ possibilities.
+	Implement the find_possible_strings(character_set, n) method to return a list of all possible strings of length n from the provided character_set.
+
+	TIP: start with an empty prefix, and then add all the characters to prefix, but for every character added, add all possible strings of size n-1 with the current 		prefix to the result set, and do this recursively.
+
+	Remember to write unit tests to test the results for this.
+
+	If invalid elements is provided in the character_set, e.g. integers, then the function should return an empty list.
+
+	An example of how it will be used:
+		def find_possible_strings(char_set, n):
+		    k = len(char_set)
+		    return possible_stringsRec(char_set, "", k, n)
+
+		def possible_stringsRec(char_set, prefix, k, n):
+		    if n == 0:
+			print(prefix)
+			return
+		    
+		    for i in range(k):
+			newPrefix = prefix + char_set[i]
+			possible_stringsRec(char_set, newPrefix, k, n - 1)
+
+		char_set = ['a','b','c']
+		possible_strings = find_possible_strings(char_set, 1)
+		print(possible_strings) # prints our result: a, b, c	

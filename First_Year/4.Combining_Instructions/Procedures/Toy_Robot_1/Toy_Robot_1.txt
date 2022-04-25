@@ -1,0 +1,75 @@
+TOY ROBOT - ITERATION 1
+You were given a prototype program that is intended to simulate a basic toy robot. We are going to use an iterative programming approach (same as with the Hangman problems) to evolve this prototype into a much more capable robot simulator and controller.
+
+We split the overall project into 5 iterations.
+
+Iteration 1: You will need to introduce functions into the initial prototype code, and get the bugs sorted out in the process.
+
+Iteration 2: Introduce the handling of commands from the user, and output of responses.
+
+Iteration 3: Give the simulated robot the ability to replay previous commands.
+
+Iteration 4: Modularize the robot’s code, and allow it to also output to a graphical interface.
+
+Iteration 5: Make use of modules provided by team members to navigate obstacles.
+
+
+
+Iteration 1
+
+Goal:
+You need to get the prototype more functional (excuse the pun) in order to use it for an important demonstration to potential investors. There are a few bugs in the existing code, and you are sure if you structure the code better by using functions, it will become easier to debug and fix.
+
+
+What you will program:
+	Restructure the code in robot.py to make use of functions
+
+	Fix bugs in the output.
+
+
+What you will learn:
+	How to define functions in Python
+
+	How to call functions
+
+	How to pass arguments (data) to functions
+
+	How to document functions using docstrings
+
+
+
+INSTRUCTIONS
+
+> STEP 1 Move Functions
+	Currently robot.py is basically one single function, called move().
+	Identify the groups of instructions that are used to move in specific directions and shapes, like square, rectangle, circle.
+
+	Define a function for each of these, e.g. move_square, move_circle
+
+	Update the move() function to make use of the functions you defined.
+
+NOTE: after this change, some of the tests in the problem repository might still fail, as you might not have fixed all the bugs yet.
+
+
+
+> STEP 2 Repeating Functions
+	There is also code in move() that repeats the movements, e.g. to move 5 times in a circle, or 3 times in a square.
+	Find these repetitions and replace it with functions as well that in turn call the various move_<shape> functions as needed.
+
+	Did you spot any bugs to fix in this step?
+
+NOTE: after this change, if done in such a way as to fix bugs in the existing code, all the tests in the problem repository should succeed.
+
+
+
+> STEP 3 Name move()
+	The main function, move() is not very descriptive.
+	Choose a more descriptive name, and justify why you chose this name, in a docstring comment for that function.
+
+Note: do not rename move() as it will break the tests, but just indicate in a comment a better name and your reasoning.
+
+
+
+> STEP 4 Document Your Function
+	Docstrings are useful to document functions that you foresee will be used a lot, especially by other developers.
+	Practice using docstrings by defining proper docstrings comments, including info on any function parameters, for all your functions.

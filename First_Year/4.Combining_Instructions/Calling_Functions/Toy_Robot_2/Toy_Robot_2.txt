@@ -1,0 +1,276 @@
+TOY ROBOT - ITERATION 2
+They say robots will take over our jobs, but not if we write the code controlling them. :-)
+
+In this 2nd iteration of the Toy Robot project we will start developing our own simulated toy robot. (The light-weight prototype from the 1st iteration managed to impress the project funders.)
+
+
+Goal:
+You are entrusted with a project that has the goal of developing a toy robot that can be used to teach children about the basics of programming. For this we need it to understand some simple commands like move forward or turn right. A kid can then issue these commands in a simple sequence to control the toy robot.
+
+What you will program:
+In this iteration of the project, we are going to develop a text based interface for our robot, and simulate the robot behaviour in our program.
+
+	- Get command input from the user and handle it
+
+	- Use variables to keep state of the robot’s position and direction
+
+	- Unit tests for testing code
+
+What you will learn:
+	- About returning values from functions
+
+	- How to pass arguments (data) to functions
+
+	- Structuring a program by using function composition
+
+	- Evolve your skills with TDD
+
+INSTRUCTION
+
+> STEP 1 Name The Robot
+In order for children to build a deeper bond with the toy robot, and thus motivate them to learn better how to control it, we need to ask a child what name they want to give to the robot.
+	- Add a function to robot.py that will ask the child to provide a name for the robot.
+
+	- Store this name so it can be used later.
+
+	- Have the robot print Hello to the child
+
+	- Remember to use functions to structure your code.
+
+	An example run of robot.py might look like:
+		What do you want to name your robot? HAL
+		HAL: Hello kiddo!
+
+
+> STEP 2 Get Command Input
+A robot that can't execute any commands won't be worth much, will it? Let's start working on it understanding some commands. The first rule of IT is if something does not work, you must be able to switch it OFF and ON again.
+	- Let us implement a OFF command for the robot.
+
+	- implement a function that will get a command as input from the user
+
+	- validate the command, i.e. it must be one of a list of commands that can be understood — for now, this only consists of the command OFF
+
+	- if an invalid command is received, let the robot tell the child that it does not understand the command, and prompt the child to enter another command
+
+	- make sure that the case of the command does not matter, i.e. a child may enter Off, OFF, off, OFf, or any combination of lower and upper case letters
+
+	- if it is the OFF command, it must exit the program
+
+	An example run might look like this:
+		What do you want to name your robot? HAL
+		HAL: Hello kiddo!
+		HAL: What must I do next? Jump up
+		HAL: Sorry, I did not understand 'Jump up'.
+		HAL: What must I do next? off
+		HAL: Shutting down..
+
+
+> STEP 3 Handle Help Command
+We want to encourage the children to learn how to control the toy robot by interacting with it. In order to facilitate this, we need a help command that will tell the child what the possible commands are.
+	
+	-Update your toy robot to understand the help command (i.e. include it in list of valid commands, and add a function that implements the command)
+
+	-When a child gives the help command, the robot must output information about the available commands, e.g:
+
+		I can understand these commands:
+		 OFF  - Shut down robot
+		 HELP - provide information about commands
+
+		An example run might look like:
+			What do you want to name your robot? HAL
+			HAL: Hello kiddo!
+			HAL: What must I do next? help
+			I can understand these commands:
+			 OFF  - Shut down robot
+			 HELP - provide information about commands
+
+			HAL: What must I do next?
+
+
+> STEP 4 Make Command Handling Testable
+We want to ensure correct behaviour of out toy robot. It will not do for it to fire its missile when you wanted it to move forward. In the section Test Driven Development we discuss why and how to test your functions.
+
+In this step we want to ensure our code is testable and write some tests for it.
+Create the test_robot.py file in the same directory as robot.py to contain your unit tests.
+
+Write a simple test that tests if your function that checks if a command is in the list of valid commands works correctly. It must check commands with different upper and lower case letters, and for correct and incorrect commands.
+
+Your function that handles the help command might print out the result directly. This is difficult to test as it does not return a value with you can easily test in code. Update your function to return the information string as a return value, and write a test to test correctness. You will need a separate function to output the information to the user.
+
+TIP	Refer to earlier topics on TDD, and remember to also add test cases for the rest of the code you implement during this exercise.
+
+
+> STEP 5 Handle Forward Command
+We actually have a nice structure now for handling commands, getting information about commands, and testing command functions. Now we can start expanding the commands our toy robot understands.
+
+In order to make the toy robot more interesting to the children, we want it to be able to move. Let us start with a simple forward movement, which moves the toy 	robot forward a certain number of steps, as indicated by a value the child provides.
+E.g. forward 10 must move the robot forward with 10 steps.
+
+	- Write a test that will test how a forward command might work.
+
+	- Add forward to the list of valid commands, and also update the help command to include it.
+
+	- You will need a way to parse the second parameter (the number of steps) from the command input provided.
+
+	- Implement a function that implements the forward command. It will need to take the steps provided as input into account.
+
+	- Output the result of the move, e.g. Moved forward by 10 steps
+
+	An example run can look like:
+		What do you want to name your robot? HAL
+		HAL: Hello kiddo!
+		HAL: What must I do next? forward 10
+		 > HAL moved forward by 10 steps.
+		HAL: What must I do next?
+
+
+> STEP 6 Keep Track of Position
+Any proper robot has some sensors to help it makes sense of its environment. One of which would help it determine where it is. We still have a way to go before adding a real sensor, but on a conceptual level we want to start making the toy robot aware of its position.
+
+In order for a child to understand more about the state of an environment, and the effect of the toy robot upon it, we want to start modelling the robot's position in terms of X and Y coordinates in a 2-dimensional area.
+Both these coordinates will be measured in number of steps, and for this iteration we assume the robot started at position (0,0), i.e. at x=0 and y=0.
+	
+	- Add functionality for tracking the x and y coordinates of the robot.
+
+	- Update the forward command, so that when the robot moves forward, the y value must increase with the number of steps
+
+	- Remember to test the new function (or functions) you added to track the coordinates
+
+	- Update the output function to also print out the new coordinates.
+
+	An example run might look like:
+		What do you want to name your robot? HAL
+		HAL: Hello kiddo!
+		HAL: What must I do next? forward 10
+		 > HAL moved forward by 10 steps.
+		 > HAL now at position (0,10).
+		HAL: What must I do next? forward 5
+		 > HAL moved forward by 5 steps.
+		 > HAL now at position (0,15).
+		HAL: What must I do next?
+
+
+> STEP 7 Back Command
+Now add a back command that does the inverse of forward, i.e. it subtracts the number of steps from current y position.
+Allow the back command as a valid command, and include it in the help information
+
+	- Implement the back command’s function and test
+
+	An example run might look like:
+		What do you want to name your robot? HAL
+		HAL: Hello kiddo!
+		HAL: What must I do next? back 10
+		 > HAL moved back by 10 steps.
+		 > HAL now at position (0,-10).
+		HAL: What must I do next? forward 5
+		 > HAL moved forward by 5 steps.
+		 > HAL now at position (0,-5).
+		HAL: What must I do next?
+
+
+> STEP 8 Handle Turn Right Command
+The toy robot is still pretty one-dimensional. Let's us enable it to turn, so we can and explore in more directions. To keep things simple in the Text UI world, we are going to assume a right-turn means turn by 90 degrees to the right.
+	- Add right as a valid command (including information in help output)
+
+	- Add a function to implement the command (and test)
+
+	- Update your position (x and y) tracking logic to take into account what direction the robot is moving, as it now might need to update the x value. Moving to 		  the right will increase the x value.
+
+	An example run might look like:
+		What do you want to name your robot? HAL
+		HAL: Hello kiddo!
+		HAL: What must I do next? forward 10
+		 > HAL moved forward by 10 steps.
+		 > HAL now at position (0,10).
+		HAL: What must I do next? right
+		 > HAL turned right.
+		 > HAL now at position (0,10).
+		HAL: What must I do next? forward 10
+		 > HAL moved forward by 10 steps.
+		 > HAL now at position (10,10).
+		HAL: What must I do next? right
+		 > HAL turned right.
+		 > HAL now at position (10,10).
+		HAL: What must I do next? forward 5
+		 > HAL moved forward by 5 steps.
+		 > HAL now at position (10,5).
+		HAL: What must I do next?
+
+
+> STEP 9 Handle Turn Left Command
+We can always let kids turn the robot 3 times to the right to get a left turn, but that seems inefficient (and might make the robot dizzy). So let us implement a left command as inverse of the right command.
+	- Add left as a valid command (including information in help output)
+
+	- Add a function to implement the command (and test)
+
+	- Update your position (x and y) tracking logic to take into account what direction the robot is moving, so it affects the x or y value correctly. Moving to the 		  left will decrease the x value.
+
+	An example run can look like:
+		What do you want to name your robot? HAL
+		HAL: Hello kiddo!
+		HAL: What must I do next? forward 10
+		 > HAL moved forward by 10 steps.
+		 > HAL now at position (0,10).
+		HAL: What must I do next? left
+		 > HAL turned left.
+		 > HAL now at position (0,10).
+		HAL: What must I do next? forward 10
+		 > HAL moved forward by 10 steps.
+		 > HAL now at position (-10,10).
+		HAL: What must I do next? left
+		 > HAL turned left.
+		 > HAL now at position (-10,10).
+		HAL: What must I do next? forward 5
+		 > HAL moved forward by 5 steps.
+		 > HAL now at position (-10,5).
+		HAL: What must I do next?
+
+
+> STEP 10 Limit The Area
+Unfortunately sometimes we are locked down a bit, and the same applies to toy robots; there might only be a certain area in which it can safely operate. We need to simulate that constraint in our program as well.
+
+In order for children to understand constraints imposed by the environment, we want to limit the area (i.e. the x and y ranges) where the robot can be moved. Any attempt to move outside this area must fail.
+For this iteration, we are defining a fixed area, where a valid range for x is -100 to 100 and valid for y is -200 to 200, effectively giving a rectangular area of 200 wide by 400 long.
+	
+	-Add code that will check a new position against the ranges, and indicate if it is an allowed move or not, i.e. if the new position will be in the range of 		 allowed values, or outside.
+
+	- You can do this separately for x and y
+
+	- Remember to try it out by first coding a test!
+
+	- Update the move functions (for forward and back commands) to first check if the new position will be valid.
+
+	- Update the output by the robot to indicate if a move was invalid.
+
+	An example run might result in:
+		 What do you want to name your robot? HAL
+		 HAL: Hello kiddo!
+		 HAL: What must I do next? forward 10
+		  > HAL moved forward by 10 steps.
+		  > HAL now at position (0,10).
+		 HAL: What must I do next? forward 200
+		 HAL: Sorry, I cannot go outside my safe zone.
+		  > HAL now at position (0,10).
+		 HAL: What must I do next? forward 100
+		  > HAL moved forward by 100 steps.
+		  > HAL now at position (0,110).
+	 	 HAL: What must I do next?
+
+
+> STEP 11 Sprint Command
+We want to introduce a special sprint command to our robot. Sprint gives it a short burst of speed and some extra distance, by using a simple recursive approach: It starts by going forward the number of steps indicated, then it goes forward iteratively one less step than the previous forward, until it counted down to zero steps.
+	
+	So a command of sprint 10 should result in e.g.:
+	 HAL: What must I do next? sprint 5
+	  > HAL moved forward by 5 steps.
+	  > HAL moved forward by 4 steps.
+	  > HAL moved forward by 3 steps.
+	  > HAL moved forward by 2 steps.
+	  > HAL moved forward by 1 steps.
+	  > HAL now at position (0,15).
+
+	- Add support for a sprint command that uses recursion to implement the function (including information in help output).
+
+	- Remember to try it out by first coding a test!
+
+	- Remember to still apply the area limits as implemented in the previous step, i.e. the robot cannot sprint pass the area limit!

@@ -1,0 +1,40 @@
+MASTERMIND - ITERATION 2
+In the 1st iteration of Mastermind you created a simple Mastermind text game. By now you probably realised that putting all your code in one big function is not good. In this iteration we need to use what we learned about functions to structure the code better.
+
+TIP	Breaking one big function into smaller functions is called functional decomposition.
+
+Goal:
+	The use case for our game remains the same as in the Data Structures - Mastermind problem. However, after a code review by the Big Man Upstairs (that is what we 		call Trevor, the senior game developer on the team), you were tasked to restructure the code to make proper use of functions.
+
+	As a software developer, you need the code to be better structured, so that it is easier to maintain, and extend with functionality in the future.
+
+What you will program:
+	Define functions for the logical groups of instructions
+
+	Define docstring comments for the functions.
+
+What you will learn:
+	How to break an existing function into smaller functions
+
+	How to document functions using docstrings
+
+INSTRUCTIONS
+
+
+> STEP 1 Introduce Functions
+The current code has one big function that does everything: run_game(). This code does a lot of different things, like creating the code, getting a guess from the user, checking the result, showing results to the user, determine if it is a win condition or not, etc.
+Restructure the current code by introducing functions for each of the logical groups of instructions, and calling these functions from run_game().
+
+	You will probably need to use global variables at this stage.
+
+	Remember: the created code may not have duplicate digits in it.
+
+	Ensure that the functions has descriptive names.
+
+	The output and expected input from the game should remain the same.
+
+
+
+> STEP 2 Document the Functions
+Since the goal is to be able to more easily maintain and extend the code, it is a good idea to document your functions, and especially the parameters it needs.
+Add a descriptive docstring to each of your functions.
