@@ -1,12 +1,12 @@
-# Problems - Mastermind
+# Problem - Word Processor
 
-* Modify `mastermind.py` to solve the problem as stated in the text file{{Mastermind_3.txt}}.
+* Modify `word_processor.py` to solve the problem as stated in the text file{{Word_Processing.txt}}.
 * You can run the program using the instructions in *To Run* below.
 * You can test technical correctness by running the unit tests as in the section *To Test* below.
 
 ### To Run
 
-* `python3 mastermind.py`
+* `python3 word_processor.py`
 * follow the input prompts to get the desired output
 
 ### To Test

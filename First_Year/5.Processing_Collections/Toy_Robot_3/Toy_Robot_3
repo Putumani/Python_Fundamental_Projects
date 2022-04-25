@@ -1,0 +1,213 @@
+TOY ROBOT ITERATION 3
+In this 3rd iteration for Toy Robot you will build on the previous iteration and evolve it to also be able to replay previous instructions.
+
+
+Goal:
+The world of IoT (Internet of Things) creates a lot of data, and you now learned some ways to process collections of data. You will enhance your toy robot program to also generate data that you need to process, getting it ready to perhaps one day become a member of the IoT world.
+
+What you will program:
+The project stakeholders asked you to that the simulated robot be able to track and replay commands. Specifically, it needs to:
+
+keep a history of all commands given to it
+
+on a replay command it must filter out all non-movement commands and redo only the movement commands, providing the full output
+
+on a replay silent command it must not show the full output, but only show the resulting updated position
+
+it must support a replay reversed command that redo movement commands in reverse order
+
+it must be possible to specify the range of commands to replay
+
+We will enhance the commands our robot understands, by implementing new functionality in robot.py, while still adhering to our TDD approach.
+
+What you will learn:
+How to use lambda functions with map and filter functions
+
+How to use list comprehensions to process data
+
+TIP	
+Do not throw away the unit tests you have for your solution from Toy Robot 2; these tests are still valid and must still succeed. You are adding functionality to your previous solution, but existing functionality must keep working the same way.
+
+
+
+INSTRUCTIONS
+
+> STEP 1 Keep a history
+You need to update robot.py so that it keeps a history of the commands given to it, in the order that it was given.
+
+	- add functions to add commands to history, and also retrieve the history
+
+	- add unit tests to test_robot.py to test that your history list is properly updated
+
+
+
+ > STEP 2 Add Replay command
+	- Add a Replay command that must filter out all non-movement commands and redo only the movement commands, providing the full output.
+
+	- Add support for the Replay command (remember to update the help information!)
+
+	- It must replay the movement commands (forward, back, left, right, sprint), but not any other commands.
+
+	- It is OK to show all the output from these commands.
+
+	NOTE: Replaying a command does not add it again to the history.
+
+	As an example, if you previously entered this:
+
+		What do you want to name your robot? HAL
+		HAL: Hello kiddo!
+		HAL: What must I do next? forward 10
+		 > HAL moved forward by 10 steps.
+		 > HAL now at position (0,10).
+		HAL: What must I do next? forward 5
+		 > HAL moved forward by 5 steps.
+		 > HAL now at position (0,15).
+		HAL: What must I do next?
+		Then if you use the Replay command it must behave like this:
+
+		HAL: What must I do next? replay
+		 > HAL moved forward by 10 steps.
+		 > HAL now at position (0,25).
+		 > HAL moved forward by 5 steps.
+		 > HAL now at position (0,30).
+		 > HAL replayed 2 commands.
+		 > HAL now at position (0,30).
+		HAL: What must I do next?
+	
+
+> STEP 3 Replay silent
+We also want an option where we do not see all the commands being replayed, but just the results in the position changes.
+
+	- Add support for a silent flag for the Replay command, so that Replay silent can be invoked (add help information as well)
+
+	- This command must do a replay of the commands, but not show the output of each command, just the number of commands replayed, and the resulting position.
+
+	As an example, if you previously entered this:
+
+	What do you want to name your robot? HAL
+	HAL: Hello kiddo!
+	HAL: What must I do next? forward 10
+	 > HAL moved forward by 10 steps.
+	 > HAL now at position (0,10).
+	HAL: What must I do next? forward 5
+	 > HAL moved forward by 5 steps.
+	 > HAL now at position (0,15).
+	HAL: What must I do next?
+	Then if you use the Replay silent command it must behave like this:
+
+	HAL: What must I do next? replay silent
+	 > HAL replayed 2 commands silently.
+	 > HAL now at position (0,30).
+	HAL: What must I do next?
+
+
+> STEP 4 Replay reversed
+We also want to be able to play back the historic commands in reverse order.
+
+	- Add support for a reversed flag for the Replay command, so that Replay reversed can be invoked (and add help information on it).
+
+	- This command must play back the commands, with full output, in reverse order to how it was invoked originally.
+
+	As an example, if you previously entered this:
+
+		What do you want to name your robot? HAL
+		HAL: Hello kiddo!
+		HAL: What must I do next? forward 10
+		 > HAL moved forward by 10 steps.
+		 > HAL now at position (0,10).
+		HAL: What must I do next? forward 5
+		 > HAL moved forward by 5 steps.
+		 > HAL now at position (0,15).
+		HAL: What must I do next?
+		Then if you use the Replay reversed command it must behave like this:
+
+		HAL: What must I do next? replay reversed
+		 > HAL moved forward by 5 steps.
+		 > HAL now at position (0,20).
+		 > HAL moved forward by 10 steps.
+		 > HAL now at position (0,30).
+		 > HAL replayed 2 commands in reverse.
+		 > HAL now at position (0,30).
+		HAL: What must I do next?
+
+
+> STEP 5 Replay reversed silent
+The Replay reversed is showing the full output, but we also need the silent flag to work with it.
+
+	- Update the Replay reversed command so that it can also take the silent flag.
+
+	- Replay reversed silent must play back the commands in reverse, and only output the number of commands and final position as per the silent flag.
+
+	As an example, if you previously entered this:
+
+		What do you want to name your robot? HAL
+		HAL: Hello kiddo!
+		HAL: What must I do next? forward 10
+		 > HAL moved forward by 10 steps.
+		 > HAL now at position (0,10).
+		HAL: What must I do next? forward 5
+		 > HAL moved forward by 5 steps.
+		 > HAL now at position (0,15).
+		HAL: What must I do next?
+		Then if you use the Replay reversed silent command it must behave like this:
+
+		HAL: What must I do next? replay reversed silent
+		 > HAL replayed 2 commands in reverse silently.
+		 > HAL now at position (0,30).
+		HAL: What must I do next?
+
+
+> STEP 6 Limit range of commands
+The Replay command (with or without the silent and/or reversed flags) will play back all previous commands. It must also be possible to specify which commands to play back as follow:
+
+	- Replay n - this will replay the last n commands, e.g. Replay 10 will replay the last 10 commands
+
+	- Replay n-m - this will replay the commands from n down to m, but not including step m (n must be bigger than m!), e.g. Replay 5-2 will replay from the fifth, 	  fourth and third last command, but not the most recent 2 (i.e. 2 is exclusive in range). You must update your Replay command to:
+
+	- support the n and n-m range parameters - these must be optional, i.e. if they are not specified, then all commands must be replayed.
+
+	- the silent and reversed flags must still be supported, e.g. Replay silent 10
+
+	As an example, if you previously entered this:
+
+	What do you want to name your robot? HAL
+	HAL: Hello kiddo!
+	HAL: What must I do next? forward 10
+	 > HAL moved forward by 10 steps.
+	 > HAL now at position (0,10).
+	HAL: What must I do next? right
+	 > HAL turned right.
+	 > HAL now at position (0,10).
+	HAL: What must I do next? forward 10
+	 > HAL moved forward by 10 steps.
+	 > HAL now at position (10,10).
+	HAL: What must I do next? right
+	 > HAL turned right.
+	 > HAL now at position (10,10).
+	HAL: What must I do next? forward 5
+	 > HAL moved forward by 5 steps.
+	 > HAL now at position (10,5).
+	HAL: What must I do next?
+	Then if you use the Replay 2 command it must behave like this:
+
+	HAL: What must I do next? replay 2
+	 > HAL turned right.
+	 > HAL now at position (10,5).
+	 > HAL moved forward by 5 steps.
+	 > HAL now at position (5,5).
+	 > HAL replayed 2 commands.
+	 > HAL now at position (5,5).
+	Or, alternatively, if you use the Replay silent 2 command it must behave like this:
+
+	HAL: What must I do next? replay silent 2
+	 > HAL replayed 2 commands silently.
+	 > HAL now at position (5,5).
+	If you use the Replay 4-2 command it must behave like this:
+
+	HAL: What must I do next? replay 4-2
+	 > HAL turned right.
+	 > HAL now at position (10,5).
+	 > HAL moved forward by 10 steps.
+	 > HAL now at position (0,5).
+	 > HAL replayed 2 commands.
+	 > HAL now at position (0,5).
