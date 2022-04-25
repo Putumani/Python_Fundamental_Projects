@@ -16,6 +16,7 @@ You are tasked to write some command line programs to help the computer science 
 Goal:
 As a computer science tutor, the user of these scripts want efficient solutions for certain algorithmic problems, in order that he/she can integrate it into their code and use it to easier mark results from students' projects. You will implement these functions in super_algos.py.
 
+
 INSTUCTIONS
 
 > STEP 1 Find Minimum
