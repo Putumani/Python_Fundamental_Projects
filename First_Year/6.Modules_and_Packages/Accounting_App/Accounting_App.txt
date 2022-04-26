@@ -1,0 +1,307 @@
+PROBLEM - ACCOUNTING APP
+In this problem we are stepping back from a detailed solution to a higher-level look at code, i.e. on the level of modules and packages.
+
+
+You will learn:
+
+	- how to define Python modules.
+
+	- how to import other Python modules and use them.
+
+	- how to structure your modules using packages.
+
+	- how to use PIP to manage dependencies
+
+	- how to use venv to manage virtual environments
+
+
+Use Case:
+You are tasked with designing the architecture of a new accounting application. The vision is that it will contain various modular pieces of functionality that can be added on to the basic application over time, or that can be swapped out for different implementations depending on the user’s needs. As part of designing this architecture you experiment with different ideas using Python modules with minimal functionality to represent the various accounting application modules.
+
+NOTE	The term architecture not only pertains to houses, office buildings and shopping malls, but is also used in software development to indicate the overarching, high-level design of a software program. This will typically include things like the modules and packages, and in some way indicate the main interactions between these.
+The accounting application would need to have features for these high-level areas:
+
+	- User authentication and permissions
+
+	- User registration and management
+
+	- Journal Entries for income and expenses
+
+	- Handling multiple currencies
+
+	- Invoicing and Sales
+
+	- Trial Balances
+
+	- Asset management
+
+	- Banking integration and reconciliation
+
+	- Reporting (including tax reporting, profit&loss, cash flow, etc)
+
+
+Goal:
+Your goal is to take a stab at designing the architecture for the accounting application using Python packages and modules. The various modules does not have to be fully implemented, but you will use an approach to have some basic initialization code for each module.
+
+You start with the main application code in accounting.py. It must eventually make use of the various modules to initialize the full application.
+
+TIP	
+Since this problem is a design experiment focusing on high-level architecture, and not so much the correctness of specific functions, you can take a bit of a breather and not use TDD. (But only this once!)
+
+
+
+INSTRUCTIONS
+
+
+> STEP 1 Create initial code
+We will start with a first stab at what the application should do by implementing some placeholder code in accounting.py.
+The application first needs to get the user to authenticate:
+
+	- implement a function authenticate_user() that simply prints out Authenticating User and returns a True or False (for now leave it True).
+
+	- call this function first when accounting.py is executed from the command line, i.e. calling python3 accounting.py should result in authenticate_user() being 		  called (i.e. the "main" script)
+
+	- Also add some simple code to just try out some of the accounting functionality:
+
+	- Add a function receive_income(amount) that simply prints out [Journal] Received R and the amount, e.g. [Journal] Received R100.00.
+
+	- Add a function pay_expense(amount) that simply prints out [Journal] Paid R and the amount, e.g. [Journal] Paid R100.00.
+
+	- call both of these functions after the features are listed, with sample amounts.
+
+TIP	
+You can format values in strings using string formatters. Read about that in How to Use String Formatters.
+	At this point you should see something like this as output:
+		Authenticating User
+		[Journal] Received R100.00
+		[Journal] Paid R100.00
+
+
+> STEP 2 Authentication Module
+Our main accounting.py file will very quickly become too bloated to effectively work on, especially if we start implementing all the features we are thinking about.
+So we need to use modules and packages to implement a better architecture for our application.
+	- Implement the authentication module by creating a file authentication.py.
+
+	- Move the authenticate_user() function to the authentication.py file.
+
+	- Update accounting.py to import this module and use the function from it.
+
+	- For architecture demonstration purposes, we want to see when certain modules are loaded:
+
+	- Add code at the start of the authentication module that will print out [Module] User Authentication loaded. when it is imported the first time.
+
+	Running python3 accounting.py should result in output like this:
+	[Module] User Authentication loaded.
+	Authenticating User
+	[Journal] Received R100.00
+	[Journal] Paid R100.00
+
+
+> STEP 3 Define User Package
+From our high-level understanding of the project, we realise that there will also be other user registration and management features, not just authentication (or login) functionality.
+It will be better to structure our modules in a hierarchy that groups modules according to their focus (or domain) area.
+	- Create a sub-directory user in your root project directory in order to define a user package.
+
+	- Move the authentication.py module to the user directory, to make it part of the user package.
+
+	- Remember to update import statements in accounting.py.
+
+	- For architecture demonstration purposes, we want to see when certain packages are initialized:
+
+	- Add code to the package’s __init__.py that will print out [Package] User package loaded. when it is initialized.
+
+	By now you should see output similar to this when running python3 accounting.py:
+		[Package] User package loaded.
+		[Module] User Authentication loaded.
+		Authenticating User
+		[Journal] Received R100.00
+		[Journal] Paid R100.00
+
+
+> STEP 4 Define Journal Module
+In a similar way, we need to define the module Journal which deals with the entry of income and expenses in the transactions package.
+	- Implement a journal module in the transactions package.
+
+	- Update accounting.py to move the receive_income and pay_expense functions to the journal module, and use the module instead.
+
+	- Remember to show [Module] Journal loaded. and [Package] Transactions package loaded. message when this module gets imported and package initialized.
+
+	By now you should see output similar to this when running python3 accounting.py:
+		[Package] User package loaded.
+		[Module] User Authentication loaded.
+		[Package] Transactions package loaded.
+		[Module] Journal loaded.
+		Authenticating User
+		[Journal] Received R100.00
+		[Journal] Paid R100.00
+
+
+> STEP 5 Allow For Multiple Bank Integrations
+The accounting package needs to be able to do bank reconciliations with different banks, so let us allow for that in our architecture.
+	- Implement a banking.reconciliation module (i.e. the package is banking, and file must be banking/reconciliation.py):
+
+	- It must contain a function do_reconciliation() that just prints out a simple message Doing bank reconciliation.
+
+	- Also show the module load and package initialization messages as per the previous steps.
+
+	- Now let us do some quick bank integrations:
+
+	- Implement module banking.fvb/reconciliation that implements the do_reconciliation() method to print out Doing First Virtual Bank reconciliation.
+
+	- Implement module banking.ubsa/reconciliation that implements the do_reconciliation() method to print out Doing Unreal Bank of South Africa reconciliation.
+
+	- Remember the module load and package initialization messages.
+
+	- Update accounting.py to import these modules and call the do_reconciliation() functions on each of the 3 banking modules.
+
+	Your application output should now be something like this:
+		[Package] User package loaded.
+		[Module] User Authentication loaded.
+		[Package] Transactions package loaded.
+		[Module] Journal loaded.
+		[Package] Banking package loaded.
+		[Module] Reconciliation loaded.
+		[Package] Banking.fvb package loaded.
+		[Module] fvb.Reconciliation loaded.
+		[Package] Banking.ubsa package loaded.
+		[Module] ubsa.Reconciliation loaded.
+		Authenticating User
+		[Journal] Received R100.00
+		[Journal] Paid R100.00
+		Doing bank reconciliation.
+		Doing First Virtual Bank reconciliation.
+		Doing Unreal Bank of South Africa reconciliation.
+
+
+> STEP 6 Import Python Module
+As already mentioned in the topic content, Python has number of built-in modules available, which you can just import and use, without first needing to download and install it.
+	We want to get hold of any command line arguments passed to our accounting.py application when it is called.
+
+	The module sys has a number of functions and variables that is managed by the interpreter, i.e. it represents the runtime Python system for our application.
+
+	The sys.argv contains the list of command line arguments passed to python when it was called.
+	Thus if you start the application by calling python3 accounting.py Hello, then argv[0] == "accounting.py" (argv[0] is always the name of the script being run) 		and argv[1] == "Hello".
+	Import sys module in accounting.py
+
+	Implement code that is run if accounting.py is run as the main script, that checks for all the command line arguments passed to the script, and prints them out, 		one below the other.
+
+	The list must not include the name of the script itself.
+
+	As an example, calling python3 accounting.py Hello Brave new World! should output (ignoring all the previous module load and initialization messages):
+		> python3 accounting.py Hello Brave new World!
+		(package and module load output)
+		Hello
+		Brave
+		new
+		World!
+		(and the rest of the output)
+
+
+> STEP 7 Import 3rd Party Module
+We want to experiment a bit with using 3rd party modules, to help make our architecture a bit more realistic. In this step we will introduce the requests module, which is a simple module for making HTTP requests to web servers.
+NOTE	The details of HTTP and web service requests are beyond the scope of this course module. For this exercise you just need to know that HTTP is a protocol, i.e. an agreed upon format, for sending messages between software programs that are connected to the internet. Typically one program (the client) sends a request to another program (the server, which is normally some specialized kind of software that has the goal of replying to requests from clients with data or content), and receives a response back. The response then contains the data, or possibly content like a web page (HTML) or image or other media.
+Install the requests module by using PIP
+
+	- Add a module banking.online.reconciliation:
+
+	- Implement its do_reconciliation() method to:
+
+	- Print out Doing Online Bank reconciliation.
+
+	- Make a simple request to wethinkcode.co.za
+
+	- You can use the following code to make a request and print the status:
+
+response = requests.get('https://www.wethinkcode.co.za')
+print(response.status_code)
+# if you print(response.text) you will see the actual WeThinkCode_ website HTML content
+Call this module’s do_reconciliation() function from accounting.py.
+
+	Expected output must be similar to:
+		(Other package and module load messages)
+		[Package] Banking.online package loaded.
+		[Module] online.Reconciliation loaded.
+		Authenticating User
+		[Journal] Received R100.00
+		[Journal] Paid R100.00
+		Doing bank reconciliation.
+		Doing First Virtual Bank reconciliation.
+		Doing Unreal Bank of South Africa reconciliation.
+		Doing Online Bank reconciliation.
+		200
+
+
+> STEP 8 Setup Virtual Environment
+Add the line help("modules") to the code that is executed when accounting.py is run from the command line.
+
+This will print out quite a long list of modules that are available in your system’s Python environment.
+
+In Managing Environments with Venv we discuss why and how to use venv to keep your Python environments simpler for each project.
+Let us make use of that:
+	- Setup a virtual environment for your accounting application using venv
+
+	- Activate that environment
+
+	- You might need to install requests again using PIP after activating the virtual environment.
+
+	- Now run accounting.py again - the help("modules") output should now be significantly less.
+
+	- When you are done playing with the modules list, remove or comment out the help("modules") code.
+
+
+
+> STEP 9 Configure Modules to Load
+Currently we have a number of modules implementing the do_reconciliation() function:
+
+	- banking.reconciliation (in banking/reconciliation.py file)
+
+	- banking.fvb.reconciliation (in banking/fvb/reconciliation.py file)
+
+	- banking.ubsa.reconciliation (in banking/ubsa/reconciliation.py file)
+
+	- banking.online.reconciliation (in banking/online/reconciliation.py file)
+
+Your accounting.py main module is also calling all of them at the moment. However, we want to change that so that:
+We only have to import the banking package in accounting.py
+
+And this will import a single configured banking integration, as a module named reconciliation
+
+There is a way to do this using the init.py file for the banking package, to configure auto-imports to do when that package is imported. (You might need to spend some time in the <<namespaces-modules-and-packages,reading material>>.)
+Update the init.py for the banking package to only auto-import the FVB (First Virtual Bank) module.
+
+Update accounting.py to import the banking package and only use the do_reconciliation() function on the module imported by the package.
+
+Your application output should not show the loading messages for the other banking integrations anymore:
+	[Package] User package loaded.
+	[Module] User Authentication loaded.
+	[Package] Transactions package loaded.
+	[Module] Journal loaded.
+	[Package] Banking package loaded.
+	[Package] Banking.fvb package loaded.
+	[Module] fvb.Reconciliation loaded.
+	Authenticating User
+	[Journal] Received R100.00
+	[Journal] Paid R100.00
+	Doing First Virtual Bank reconciliation.
+
+
+> STEP 10 Rest of the Modules
+You now had some practice with defining a number of packages and modules. We also listed some other high-level modules that does not yet have placeholder modules:
+User Management
+
+	- Invoicing
+
+	- Trial Balance
+
+	- Multiple Currency Support
+
+	- Asset Management
+
+	- Reporting
+
+We want to experiment with the full high-level architecture, thus:
+Add placeholder modules (in proper packages) for each of the above.
+
+Remember the module load messages.
+
+Add some placeholder function to each module, and call that from accounting.py

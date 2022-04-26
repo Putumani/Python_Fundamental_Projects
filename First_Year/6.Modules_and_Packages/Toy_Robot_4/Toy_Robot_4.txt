@@ -1,0 +1,173 @@
+TOY ROBOT - ITERATION 4
+In this 4th iteration of Toy Robot you will build on your solution for Toy Robot 3. We want to modularize it, and in doing so allow for using external modules to improve our robot.
+
+
+Goal:
+The sponsors of the Toy Robot project are looking for an interface that is more impressive than the current textual world output. You will need to split the command and control functionality from the way the robot’s response is presented to the user. If properly modularized, it will even allow hooking up the control to an actual robot.
+
+
+What you will program:
+Up to now the Toy robot program consisted of a single script in robot.py. This already started to get very complex to change. Let us use what we learned about modular programming to improve the code, and add a few features in the process.
+
+	- The robot program needs to be modified:
+
+	- so that certain functionality is moved to modules to enhance the code structure.
+
+	- to enable showing the robot’s movements on a graphical user interface, as an alternative to the terminal output.
+
+	- We will restructure our robot.py code by moving some of the functionality to additional modules that we define, while still adhering to our TDD approach.
+
+
+What you will learn:
+	- how to import and use other Python modules,
+
+	- how to render simple graphics in an application window,
+
+	- how to build installable packages for your modules,
+
+TIP	
+Do not throw away the unit tests you have for your solution from Toy Robot 3; these tests are still valid and must still succeed (allowing for updated tests in test_robot.py where functions move to other module files). You are adding functionality to your previous solution, but existing functionality must keep working the same way. It is also a good idea to have separate unit test .py files for different modules, as we will indicate in the instructions.
+
+
+
+INSTRUCTIONS
+
+> STEP 1 Showing Position
+You can either use the starting robot.py code supplied in the problem repository, or you can copy in your solution from Toy Robot 3 exercise, and use that as starting point.
+
+In your current robot.py code, you are tracking the position of the robot in the simulated (and constrained in size) area (or world) it can move around in.
+You are most probably using a simple print statement to print out the updated position after a command.
+
+We want to evolve the way we show the world of the toy robot, and we must start by modularization the position and constraints tracking.
+Add a package world (it will eventually contain modules that defines the virtual world of the robot) with sub-package text (text-based world modules) and a module world.py
+
+Move the code (variables and functions) you use to track and show the position of your robot to this module.
+
+You might need to change some of your functions a bit, or perhaps even add functions for updating the position related variables.
+
+You will also need to update your unit tests. The best way is to create a separate unit test for the world module (test_world.py) and add tests there for the functions in world.py.
+
+For this exercise, place test_world.py in the root directory of the problem, i.e. the same directory as test_robot.py.
+
+Remember to also move the code that checks for constraints on movement (the max and min x and y values), as this is part of the logic for the virtual world of the robot.
+
+Update robot.py to make use of the world.text.world module to track and output the robot’s position in the virtual world as it executes commands.
+
+_NOTE_: the output you get when running #robot.py# should still be the same as previously after this step, e.g.:
+
+	What do you want to name your robot? HAL
+	HAL: Hello kiddo!
+	HAL: What must I do next? forward 10
+	 > HAL moved forward by 10 steps.
+	 > HAL now at position (0,10).
+	HAL: What must I do next? forward 5
+	 > HAL moved forward by 5 steps.
+	 > HAL now at position (0,15).
+	HAL: What must I do next?
+
+You must end up with a program consisting of the following files:
+	robot.py
+	world/text/world.py
+	test_robot.py
+	test_world.py
+
+
+> STEP 2 Adding a Graphics Interface
+A text-based user interface is limited in many ways, so let us make use of an easy way to get a basic graphical interface working: Turtle Graphics.
+
+	- We want to add a world.turtle.world module which makes use of the python turtle package to render the robot’s virtual position and world.
+	Add a turtle sub-package to world and in it create the module world.py
+
+	- Ensure you understand the basics of working with the turtle package for this module.
+
+	- Implement the same functions you use from the world.text.world module in robot.py in this world.turtle.world module, but change it so that instead of printing 		the positions, it rather updates the turtle in the turtle application window.
+
+	- Implement the constraint functionality so that it physically shows the constraints box in the turtle screen.
+
+	- Your robot must still not be allowed outside of the constrained area, but you are welcome to change the size of this area.
+
+NOTE: you will still use the terminal to enter commands as text, and it can still show other command output.
+
+TIP	
+If you use exactly the same function signatures in the world.text.world and world.turtle.world modules, then you can change which one is used from robot.py by just changing an import statement, and not having to do any other code changes.
+Example:
+	turtle001
+	You must now have the following files:
+	robot.py
+	world/text/world.py
+	world/turtle/world.py
+	test_robot.py
+	test_world.py
+
+
+> STEP 3 Configure the Output
+You now have a toy robot program that has two possible ways of representing the robot's world:
+	- show it as text output in the terminal, if the module world.text.world is used.
+
+	- show it as on a graphical interface, if the module world.turtle.world is used.
+
+	- However, instead of having to change the import statements to choose which option to use, we want the user to be able to determine this via a command line 		argument.
+	Use the sys.argv variable to get command line arguments from the user.
+
+	- If the user specify either nothing or text (i.e. call python robot.py text) then it must use the world.text.world module.
+
+	- If the user specify turtle (i.e. call python robot.py turtle) then it must use the world.turtle.world module.
+
+	- Now change your code to dynamically import the module as specified by the user, so that that output will be used.
+
+
+> STEP 4 Add Obstacles
+Since we are making things more interesting, let's add some obstacles to the robot's world. We need a world to be aware of obstacles at a given position (i.e. at a given x,y coordinate).
+The robot will not be able to move through an obstacle. For this exercise, assume an obstacle is a square of size 5 by 5 (i.e. 5 robot steps).
+	- Add a world.obstacles module that keep a list of obstacles (each "obstacle" can just be a tuple with (x,y) values)
+
+	- An obstacle (x,y) represents a square obstacle from positions x,y to x+4,y to x+4,y+4 to x,y+4.
+
+	- An obstacle can start inside the constrained area, but is allowed to go over the constrained area.
+
+	- Let it create a random number (up to 10) of randomly positioned obstacles.
+
+	- Add a function is_position_blocked(x,y) that returns True if position (x,y) falls inside an obstacle.
+
+	- Add a function is_path_blocked(x1,y1, x2, y2) that returns True if there is an obstacle in the line between the coordinates (x1, y1) and (x2, y2).
+
+	- To keep things simpler: remember that our robot cannot (yet) move in diagonals, as it can only turn in right-angles. So either x1==x2 or y1==y2.
+
+	- Add a function get_obstacles() that returns the list of obstacles.
+
+	- Add a unit tests file, test_obstacles.py, in the same directory as the other tests to test your obstacle functions with.
+
+You must now have the following files:
+	robot.py
+	world/text/world.py
+	world/turtle/world.py
+	world/obstacles.py
+	test_robot.py
+	test_world.py
+	test_obstacles.py
+
+
+> STEP 5 Obstacle Aware World
+Now it is time to make our robot's world aware of obstacles.
+Update the position checking code in both the text.world and turtle.world modules to take the obstacles into account, i.e. the robot will not be allowed to move to a position if there is an obstacle at the destination, or on the way to the destination.
+
+	- In both cases the text output must indicate Sorry, there is an obstacle in the way.
+
+	- Update the turtle.world module to also draw the obstacles in the turtle screen.
+
+	- Update the text.world module to list all the obstacles at the start, after the robot received a name.
+
+An example output when using text.world might be:
+	What do you want to name your robot? HAL
+	HAL: Hello kiddo!
+	There are some obstacles:
+	- At position 0,15 (to 4,19)
+	- At position 50,60 (to 54,64)
+	- At position -20,-30 (to -16, -26)
+	HAL: What must I do next? forward 10
+	> HAL moved forward by 10 steps.
+	> HAL now at position (0,10).
+	HAL: What must I do next? forward 10
+	HAL: Sorry, there is an obstacle in the way.
+	> HAL now at position (0,10).
+
